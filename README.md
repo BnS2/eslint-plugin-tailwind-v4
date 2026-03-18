@@ -1,6 +1,6 @@
-# eslint-plugin-tailwind-v4
+# @BnS2/eslint-plugin-tailwind-v4
 
-An ESLint plugin to catch typos in Tailwind CSS v4 classes. This plugin validates your `className` strings against your actual Tailwind configuration by loading the Tailwind v4 design system directly from your CSS entry point.
+An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This plugin validates your `className` strings against your actual Tailwind configuration by loading the Tailwind v4 design system directly from your CSS entry point.
 
 ## Features
 
@@ -12,19 +12,16 @@ An ESLint plugin to catch typos in Tailwind CSS v4 classes. This plugin validate
 
 ## Installation
 
-Since this is currently a local package, you can add it to your project's `devDependencies`. If you plan to use it via `pnpm`, you can use `link:` or `file:` protocols, or publish it to a private/public registry.
-
 ```bash
-pnpm add -D ./path/to/eslint-plugin-tailwind-v4
+pnpm add -D @BnS2/eslint-plugin-tailwind-v4
 ```
 
-### Dependencies
+### Peer Dependencies
 
 Ensure you have the following installed in your project:
 
 - `eslint` >= 9.0.0
 - `tailwindcss` >= 4.0.0
-- `synckit`
 
 ## Usage (Flat Config)
 
@@ -32,7 +29,7 @@ In your `eslint.config.js`, import the plugin and use the `recommended` helper. 
 
 ```javascript
 import { defineConfig } from "eslint/config";
-import tailwindV4 from "eslint-plugin-tailwind-v4";
+import tailwindV4 from "@BnS2/eslint-plugin-tailwind-v4";
 
 export default defineConfig([
   // ... other configs (next, biome, etc.)
@@ -57,7 +54,7 @@ If you are using Next.js and Biome (as mentioned in your setup), your configurat
 import { defineConfig, globalIgnores } from "eslint/config";
 import biome from "eslint-config-biome";
 import nextVitals from "eslint-config-next/core-web-vitals";
-import tailwindV4 from "eslint-plugin-tailwind-v4";
+import tailwindV4 from "@BnS2/eslint-plugin-tailwind-v4";
 
 export default defineConfig([
   ...nextVitals,
