@@ -69,6 +69,39 @@ export default defineConfig([
 ]);
 ```
 
+## Recommended Complementary Plugins
+
+For the best Tailwind CSS v4 experience, we recommend using this plugin alongside:
+
+- **[eslint-plugin-tailwind-canonical-classes](https://github.com/m-mizutani/eslint-plugin-tailwind-canonical-classes)**: Ensures your classes are canonical, sorted, and non-redundant.
+
+### The "Pro" Setup
+
+While `eslint-plugin-tailwind-canonical-classes` handles organization and consistency, this plugin (`@BnS2/eslint-plugin-tailwind-v4`) handles **validity**. Using them together ensures your classes are both valid and well-organized.
+
+```javascript
+import { defineConfig } from "eslint/config";
+import tailwindV4 from "@BnS2/eslint-plugin-tailwind-v4";
+import tailwindCanonical from "eslint-plugin-tailwind-canonical-classes";
+
+export default defineConfig([
+  // 1. Organization & Sorting
+  ...tailwindCanonical.configs["flat/recommended"],
+  
+  // 2. Validity & Typo Detection
+  tailwindV4.configs.recommended("./app/globals.css"),
+
+  {
+    rules: {
+      "tailwind-canonical-classes/tailwind-canonical-classes": [
+        "warn",
+        { cssPath: "./app/globals.css" },
+      ],
+    },
+  },
+]);
+```
+
 ## Why this plugin?
 
 While Biome and other tools provide excellent linting and formatting, Tailwind CSS v4 introduced significant changes to how classes are generated. This plugin ensures that any class you type actually exists in your generated CSS, preventing "silent" typos that result in missing styles.
