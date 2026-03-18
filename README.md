@@ -1,4 +1,4 @@
-# @BnS2/eslint-plugin-tailwind-v4
+# @bns2/eslint-plugin-tailwind-v4
 
 An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This plugin validates your `className` strings against your actual Tailwind configuration by loading the Tailwind v4 design system directly from your CSS entry point.
 
@@ -13,7 +13,7 @@ An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This
 ## Installation
 
 ```bash
-pnpm add -D @BnS2/eslint-plugin-tailwind-v4
+pnpm add -D @bns2/eslint-plugin-tailwind-v4
 ```
 
 ### Peer Dependencies
@@ -29,7 +29,7 @@ In your `eslint.config.js`, import the plugin and use the `recommended` helper. 
 
 ```javascript
 import { defineConfig } from "eslint/config";
-import tailwindV4 from "@BnS2/eslint-plugin-tailwind-v4";
+import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
 
 export default defineConfig([
   // ... other configs (next, biome, etc.)
@@ -54,7 +54,7 @@ If you are using Next.js and Biome (as mentioned in your setup), your configurat
 import { defineConfig, globalIgnores } from "eslint/config";
 import biome from "eslint-config-biome";
 import nextVitals from "eslint-config-next/core-web-vitals";
-import tailwindV4 from "@BnS2/eslint-plugin-tailwind-v4";
+import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
 
 export default defineConfig([
   ...nextVitals,
@@ -77,11 +77,11 @@ For the best Tailwind CSS v4 experience, we recommend using this plugin alongsid
 
 ### The "Pro" Setup
 
-While `eslint-plugin-tailwind-canonical-classes` handles organization and consistency, this plugin (`@BnS2/eslint-plugin-tailwind-v4`) handles **validity**. Using them together ensures your classes are both valid and well-organized.
+While `eslint-plugin-tailwind-canonical-classes` handles organization and consistency, this plugin (`@bns2/eslint-plugin-tailwind-v4`) handles **validity**. Using them together ensures your classes are both valid and well-organized.
 
 ```javascript
 import { defineConfig } from "eslint/config";
-import tailwindV4 from "@BnS2/eslint-plugin-tailwind-v4";
+import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
 import tailwindCanonical from "eslint-plugin-tailwind-canonical-classes";
 
 export default defineConfig([
