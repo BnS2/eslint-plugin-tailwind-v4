@@ -1,7 +1,6 @@
 {
   "name": "@bns2/eslint-plugin-tailwind-v4",
-  "version": "1.0.0",
-
+  "version": "1.0.1",
   "description": "ESLint plugin to catch typos in Tailwind CSS v4 classes",
   "repository": {
     "type": "git",
