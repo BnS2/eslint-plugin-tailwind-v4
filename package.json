@@ -3,6 +3,14 @@
   "version": "1.0.0",
 
   "description": "ESLint plugin to catch typos in Tailwind CSS v4 classes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BnS2/eslint-plugin-tailwind-v4.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BnS2/eslint-plugin-tailwind-v4/issues"
+  },
+  "homepage": "https://github.com/BnS2/eslint-plugin-tailwind-v4#readme",
   "main": "index.js",
   "type": "module",
   "files": [
@@ -21,8 +29,11 @@
     "v4",
     "typo"
   ],
-  "author": "",
+  "author": "BnS2",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "peerDependencies": {
     "eslint": ">=9.0.0",
     "tailwindcss": ">=4.0.0"

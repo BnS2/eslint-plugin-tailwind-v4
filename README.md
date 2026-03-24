@@ -114,6 +114,10 @@ The `typo` rule accepts a single option:
 | :--- | :--- | :--- | :--- |
 | `cssPath` | `string` | Yes | Path to the CSS file where `@tailwind` directives or v4 imports are defined. |
 
+## Contributing
+
+Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
+
 ## License
 
 MIT
