@@ -4,11 +4,13 @@ An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This
 
 ## Features
 
+- **Typo Detection**: Catches invalid Tailwind class names by validating them against your actual design system.
+- **Nativewind Support**: Tested and works seamlessly with Nativewind v5 projects.
 - **Tailwind v4 Support**: Specifically designed for Tailwind CSS v4.
 - **Real-time Validation**: Uses `@tailwindcss/node` to verify if a class is valid within your theme.
 - **Flat Config Ready**: Built for modern ESLint (v9+) and Flat Config.
 - **Performance**: Utilizes `synckit` to perform synchronous validation via a background worker, ensuring ESLint stays responsive.
-- **Biome Compatible**: Designed to work alongside `eslint-config-biome`.
+- **Biome & Prettier Compatible**: Designed to work alongside `eslint-config-biome` and `prettier-plugin-tailwindcss`.
 
 ## Installation
 
@@ -22,8 +24,11 @@ Ensure you have the following installed in your project:
 
 - `eslint` >= 9.0.0
 - `tailwindcss` >= 4.0.0
+- `nativewind` >= 5.0.0 (Optional, for Nativewind projects)
 
 ## Usage (Flat Config)
+
+### Standard Configuration
 
 In your `eslint.config.js`, import the plugin and use the `recommended` helper. You **must** provide the path to your Tailwind CSS entry file (e.g., `./app/globals.css`).
 
@@ -44,6 +49,32 @@ export default defineConfig([
     },
   },
 ]);
+```
+
+### Expo / Nativewind v5 Configuration
+
+If you are using Expo with Nativewind v5, your `eslint.config.mjs` might look like this:
+
+```javascript
+import expoConfig from "eslint-config-expo/flat.js";
+import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  ...expoConfig,
+  {
+    ignores: ["dist/*", ".expo/*"],
+  },
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: {
+      "tailwind-v4": tailwindV4,
+    },
+    rules: {
+      "tailwind-v4/typo": ["error", { cssPath: "./global.css" }],
+    },
+  },
+];
 ```
 
 ### Example Configuration with Next.js & Biome
@@ -73,13 +104,15 @@ export default defineConfig([
 
 For the best Tailwind CSS v4 experience, we recommend using this plugin alongside:
 
+- **[prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)**: Automatically sorts your classes according to the recommended order.
 - **[eslint-plugin-tailwind-canonical-classes](https://github.com/m-mizutani/eslint-plugin-tailwind-canonical-classes)**: Ensures your classes are canonical, sorted, and non-redundant.
 
 ### The "Pro" Setup
 
-While `eslint-plugin-tailwind-canonical-classes` handles organization and consistency, this plugin (`@bns2/eslint-plugin-tailwind-v4`) handles **validity**. Using them together ensures your classes are both valid and well-organized.
+While `prettier-plugin-tailwindcss` and `eslint-plugin-tailwind-canonical-classes` handle organization and consistency, this plugin (`@bns2/eslint-plugin-tailwind-v4`) handles **validity**. Using them together ensures your classes are both valid and well-organized.
 
 ```javascript
+// eslint.config.js
 import { defineConfig } from "eslint/config";
 import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
 import tailwindCanonical from "eslint-plugin-tailwind-canonical-classes";
@@ -100,6 +133,18 @@ export default defineConfig([
     },
   },
 ]);
+```
+
+```json
+{
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "printWidth": 120,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./global.css"
+}
 ```
 
 ## Why this plugin?
