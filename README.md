@@ -136,7 +136,6 @@ export default defineConfig([
 ```
 
 ```json
-// .prettierrc
 {
   "semi": true,
   "singleQuote": false,
@@ -144,7 +143,7 @@ export default defineConfig([
   "trailingComma": "all",
   "printWidth": 120,
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindConfig": "./global.css"
+  "tailwindStylesheet": "./global.css"
 }
 ```
 
