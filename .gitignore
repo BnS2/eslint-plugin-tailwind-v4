@@ -28,3 +28,4 @@ build/
 .next/
 out/
 agent-context.md
+test-verify/
