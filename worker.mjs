@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import postcss from "postcss";
 import selectorParser from "postcss-selector-parser";
 
-const require = createRequire(import.meta.url);
+
 const cache = new Map();
 
 /**
@@ -43,13 +43,16 @@ function resolveDependencies(filePath, visited = new Set()) {
   if (visited.has(filePath) || !fs.existsSync(filePath)) return visited;
   visited.add(filePath);
 
-  const content = fs.readFileSync(filePath, "utf-8");
-  const importRegex = /@import\s+["']([^"']+)["']/g;
+  // Strip CSS comments to ignore @import inside them
+  const content = fs.readFileSync(filePath, "utf-8").replace(/\/\*[\s\S]*?\*\//g, "");
+  
+  // Regex to capture @import path, supporting simple quotes, url(), and optional media queries
+  const importRegex = /@import\s+(?:url\s*\()?\s*["']?([^"'\s\)]+)["']?\s*\)?\s*([^;]*);?/g;
   let match;
 
   while ((match = importRegex.exec(content)) !== null) {
     const importPath = match[1];
-    if (importPath.startsWith("tailwindcss/")) continue; // Skip built-in tailwind imports
+    if (importPath.startsWith("tailwindcss/")) continue;
     
     const resolvedPath = resolve(dirname(filePath), importPath.endsWith('.css') ? importPath : `${importPath}.css`);
     resolveDependencies(resolvedPath, visited);
@@ -61,7 +64,7 @@ function resolveDependencies(filePath, visited = new Set()) {
 /**
  * Extract all class names from a set of CSS files using PostCSS.
  */
-async function extractClasses(files) {
+function extractClasses(files) {
   const classes = new Set();
   const processor = selectorParser((selectors) => {
     selectors.walkClasses((node) => {
@@ -97,7 +100,17 @@ runAsWorker(async (cssPath, candidates) => {
   }
 
   const dependencies = resolveDependencies(absoluteCssPath);
-  const maxMtime = Math.max(...Array.from(dependencies).map(f => fs.statSync(f).mtimeMs));
+  
+  let maxMtime = 0;
+  for (const f of dependencies) {
+    try {
+      const stats = fs.statSync(f);
+      if (stats.mtimeMs > maxMtime) maxMtime = stats.mtimeMs;
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e;
+    }
+  }
+  if (maxMtime === 0) maxMtime = Date.now();
 
   if (!entry.designSystem || maxMtime > entry.lastMtime) {
     entry.lastMtime = maxMtime;
@@ -106,7 +119,7 @@ runAsWorker(async (cssPath, candidates) => {
     const cssContent = fs.readFileSync(absoluteCssPath, "utf-8");
     
     entry.designSystem = await __unstable__loadDesignSystem(cssContent, { base: dirname(absoluteCssPath) });
-    entry.customClasses = await extractClasses(dependencies);
+    entry.customClasses = extractClasses(dependencies);
   }
 
   const cssValues = entry.designSystem.candidatesToCss(candidates);
