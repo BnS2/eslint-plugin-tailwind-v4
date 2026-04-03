@@ -113,8 +113,8 @@ export default defineConfig([
 
 For the best Tailwind CSS v4 experience, we recommend using this plugin alongside:
 
-- **[prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)**: Automatically sorts your classes according to the recommended order.
-- **[eslint-plugin-tailwind-canonical-classes](https://github.com/m-mizutani/eslint-plugin-tailwind-canonical-classes)**: Ensures your classes are canonical, sorted, and non-redundant.
+- **[prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss)**: Automatically sorts your classes according to the recommended order.
+- **[eslint-plugin-tailwind-canonical-classes](https://www.npmjs.com/package/eslint-plugin-tailwind-canonical-classes)**: Ensures your classes are canonical, sorted, and non-redundant.
 
 ### The "Pro" Setup
 
