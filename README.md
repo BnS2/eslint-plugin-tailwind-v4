@@ -5,6 +5,11 @@ An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This
 ## Features
 
 - **Typo Detection**: Catches invalid Tailwind class names by validating them against your actual design system.
+- **Custom Class Support**: Supports any custom classes defined in your CSS files (no matter if they are in `@layer` or just bare CSS).
+- **Dynamic Reloading**: Automatically detects changes in your CSS files and re-validates classes without needing to restart ESLint.
+
+> [!TIP]
+> After updating to this version (v1.0.3+), we recommend restarting your IDE or ESLint server once to ensure the new worker logic is active. After that, any changes you make to your CSS file will be picked up **automatically** with no further restarts required.
 - **Nativewind Support**: Tested and works seamlessly with Nativewind v5 projects.
 - **Tailwind v4 Support**: Specifically designed for Tailwind CSS v4.
 - **Real-time Validation**: Uses `@tailwindcss/node` to verify if a class is valid within your theme.
@@ -24,7 +29,11 @@ Ensure you have the following installed in your project:
 
 - `eslint` >= 9.0.0
 - `tailwindcss` >= 4.0.0
+- `@tailwindcss/node` >= 4.0.0 (Usually included with `@tailwindcss/postcss`)
 - `nativewind` >= 5.0.0 (Optional, for Nativewind projects)
+
+> [!NOTE]
+> This plugin relies on `@tailwindcss/node` to load your design system. If you are using `@tailwindcss/postcss`, this is already included as a dependency. If not, you may need to install it manually.
 
 ## Usage (Flat Config)
 
