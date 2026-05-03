@@ -46,24 +46,26 @@ Ensure you have the following installed in your project:
 > **Why do Next.js and Expo work out of the box?**  
 > When you use `eslint-config-next/core-web-vitals` or `eslint-config-expo`, these presets automatically configure a parser for you under the hood (like `@typescript-eslint/parser` or `@babel/eslint-parser`). They handle this silently, so you never notice it.
 >
-> **For barebones ESLint setups**, install `typescript-eslint` and add it to your config:
+> **For barebones ESLint setups**, install `@typescript-eslint/parser` and add it to your config:
 
 ```javascript
-import tseslint from "typescript-eslint";
+import tsParser from "@typescript-eslint/parser";
 import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
 
-export default tseslint.config({
-  files: ["**/*.{ts,tsx}"],
-  plugins: {
-    "tailwind-v4": tailwindV4,
+export default [
+  {
+    files: ["**/*.{ts,tsx}"],
+    plugins: {
+      "tailwind-v4": tailwindV4,
+    },
+    languageOptions: {
+      parser: tsParser,
+    },
+    rules: {
+      "tailwind-v4/typo": ["error", { cssPath: "./app/globals.css" }],
+    },
   },
-  languageOptions: {
-    parser: tseslint.parser,
-  },
-  rules: {
-    "tailwind-v4/typo": ["error", { cssPath: "./app/globals.css" }],
-  },
-});
+];
 ```
 
 Framework configs like Next.js (`eslint-config-next/core-web-vitals`) and Expo (`eslint-config-expo`) include a parser by default, so no additional setup is required.

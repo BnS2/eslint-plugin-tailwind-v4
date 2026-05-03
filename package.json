@@ -43,6 +43,9 @@
 	"peerDependenciesMeta": {
 		"nativewind": {
 			"optional": true
+		},
+		"@typescript-eslint/parser": {
+			"optional": true
 		}
 	},
 	"dependencies": {
