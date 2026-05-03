@@ -1,57 +1,58 @@
 {
-  "name": "@bns2/eslint-plugin-tailwind-v4",
-  "version": "1.0.6",
-  "description": "ESLint plugin to catch typos in Tailwind CSS v4 classes",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BnS2/eslint-plugin-tailwind-v4.git"
-  },
-  "bugs": {
-    "url": "https://github.com/BnS2/eslint-plugin-tailwind-v4/issues"
-  },
-  "homepage": "https://github.com/BnS2/eslint-plugin-tailwind-v4#readme",
-  "main": "index.js",
-  "type": "module",
-  "files": [
-    "index.js",
-    "worker.mjs",
-    "README.md"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "eslint",
-    "eslintplugin",
-    "tailwindcss",
-    "tailwind",
-    "v4",
-    "typo"
-  ],
-  "author": "BnS2",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18.18.0"
-  },
-  "peerDependencies": {
-    "@tailwindcss/node": ">=4.0.0",
-    "eslint": ">=9.0.0",
-    "nativewind": "^5.0.0-0",
-    "tailwindcss": ">=4.0.0"
-  },
-  "peerDependenciesMeta": {
-    "nativewind": {
-      "optional": true
-    }
-  },
-  "dependencies": {
-    "postcss": "^8.5.8",
-    "postcss-selector-parser": "^7.1.0",
-    "synckit": "^0.9.2"
-  },
-  "devDependencies": {
-    "@tailwindcss/node": "^4.2.2",
-    "@tailwindcss/postcss": "^4.2.2",
-    "tailwindcss": "^4.2.2"
-  }
+	"name": "@bns2/eslint-plugin-tailwind-v4",
+	"version": "1.0.7",
+	"description": "ESLint plugin to catch typos in Tailwind CSS v4 classes",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/BnS2/eslint-plugin-tailwind-v4.git"
+	},
+	"install": "npm i -D @bns2/eslint-plugin-tailwind-v4",
+	"bugs": {
+		"url": "https://github.com/BnS2/eslint-plugin-tailwind-v4/issues"
+	},
+	"homepage": "https://github.com/BnS2/eslint-plugin-tailwind-v4#readme",
+	"main": "index.js",
+	"type": "module",
+	"files": [
+		"index.js",
+		"worker.mjs",
+		"README.md"
+	],
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"eslint",
+		"eslintplugin",
+		"tailwindcss",
+		"tailwind",
+		"v4",
+		"typo"
+	],
+	"author": "BnS2",
+	"license": "MIT",
+	"engines": {
+		"node": ">=18.18.0"
+	},
+	"peerDependencies": {
+		"@tailwindcss/node": ">=4.0.0",
+		"eslint": ">=9.0.0",
+		"nativewind": "^5.0.0-0",
+		"tailwindcss": ">=4.0.0"
+	},
+	"peerDependenciesMeta": {
+		"nativewind": {
+			"optional": true
+		}
+	},
+	"dependencies": {
+		"postcss": "^8.5.8",
+		"postcss-selector-parser": "^7.1.0",
+		"synckit": "^0.9.2"
+	},
+	"devDependencies": {
+		"@tailwindcss/node": "^4.2.2",
+		"@tailwindcss/postcss": "^4.2.2",
+		"tailwindcss": "^4.2.2"
+	}
 }
