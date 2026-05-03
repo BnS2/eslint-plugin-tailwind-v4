@@ -21,10 +21,10 @@ An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This
 ## Installation
 
 ```bash
+# pnpm
 pnpm add -D @bns2/eslint-plugin-tailwind-v4
-```
 
-```bash
+# npm
 npm install -D @bns2/eslint-plugin-tailwind-v4
 ```
 
@@ -42,11 +42,11 @@ Ensure you have the following installed in your project:
 
 > [!NOTE]
 > **Parser Requirement**: If your ESLint configuration does not include a parser, you will need to install one separately. This is because barebones ESLint only understands standard JavaScript—it cannot parse TypeScript or JSX without a parser.
-
+>
 > **Why do Next.js and Expo work out of the box?**  
 > When you use `eslint-config-next/core-web-vitals` or `eslint-config-expo`, these presets automatically configure a parser for you under the hood (like `@typescript-eslint/parser` or `@babel/eslint-parser`). They handle this silently, so you never notice it.
-
-> **For barebones ESLint setups**, install `@typescript-eslint/parser` and add it to your config:
+>
+> **For barebones ESLint setups**, install `typescript-eslint` and add it to your config:
 
 ```javascript
 import tseslint from "typescript-eslint";
