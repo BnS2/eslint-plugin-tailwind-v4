@@ -10,6 +10,7 @@ An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This
 
 > [!TIP]
 > After updating to this version (v1.0.3+), we recommend restarting your IDE or ESLint server once to ensure the new worker logic is active. After that, any changes you make to your CSS file will be picked up **automatically** with no further restarts required.
+
 - **Nativewind Support**: Tested and works seamlessly with Nativewind v5 projects.
 - **Tailwind v4 Support**: Specifically designed for Tailwind CSS v4.
 - **Real-time Validation**: Uses `@tailwindcss/node` to verify if a class is valid within your theme.
@@ -20,7 +21,11 @@ An ESLint plugin to catch and prevent typos in Tailwind CSS v4 class names. This
 ## Installation
 
 ```bash
+# pnpm
 pnpm add -D @bns2/eslint-plugin-tailwind-v4
+
+# npm
+npm install -D @bns2/eslint-plugin-tailwind-v4
 ```
 
 ### Peer Dependencies
@@ -35,6 +40,36 @@ Ensure you have the following installed in your project:
 > [!NOTE]
 > This plugin relies on `@tailwindcss/node` to load your design system. If you are using `@tailwindcss/postcss`, this is already included as a dependency. If not, you may need to install it manually.
 
+> [!NOTE]
+> **Parser Requirement**: If your ESLint configuration does not include a parser, you will need to install one separately. This is because barebones ESLint only understands standard JavaScript—it cannot parse TypeScript or JSX without a parser.
+>
+> **Why do Next.js and Expo work out of the box?**  
+> When you use `eslint-config-next/core-web-vitals` or `eslint-config-expo`, these presets automatically configure a parser for you under the hood (like `@typescript-eslint/parser` or `@babel/eslint-parser`). They handle this silently, so you never notice it.
+>
+> **For barebones ESLint setups**, install `@typescript-eslint/parser` and add it to your config:
+
+```javascript
+import tsParser from "@typescript-eslint/parser";
+import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
+
+export default [
+  {
+    files: ["**/*.{ts,tsx}"],
+    plugins: {
+      "tailwind-v4": tailwindV4,
+    },
+    languageOptions: {
+      parser: tsParser,
+    },
+    rules: {
+      "tailwind-v4/typo": ["error", { cssPath: "./app/globals.css" }],
+    },
+  },
+];
+```
+
+Framework configs like Next.js (`eslint-config-next/core-web-vitals`) and Expo (`eslint-config-expo`) include a parser by default, so no additional setup is required.
+
 ## Usage (Flat Config)
 
 ### Standard Configuration
@@ -47,10 +82,10 @@ import tailwindV4 from "@bns2/eslint-plugin-tailwind-v4";
 
 export default defineConfig([
   // ... other configs (next, biome, etc.)
-  
+
   // Initialize the plugin with your CSS entry point
   tailwindV4.configs.recommended("./app/globals.css"),
-  
+
   {
     rules: {
       // You can also customize the rule directly
@@ -129,7 +164,7 @@ import tailwindCanonical from "eslint-plugin-tailwind-canonical-classes";
 export default defineConfig([
   // 1. Organization & Sorting
   ...tailwindCanonical.configs["flat/recommended"],
-  
+
   // 2. Validity & Typo Detection
   tailwindV4.configs.recommended("./app/globals.css"),
 
@@ -164,9 +199,9 @@ While Biome and other tools provide excellent linting and formatting, Tailwind C
 
 The `typo` rule accepts a single option:
 
-| Option | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `cssPath` | `string` | Yes | Path to the CSS file where `@tailwind` directives or v4 imports are defined. |
+| Option    | Type     | Required | Description                                                                  |
+| :-------- | :------- | :------- | :--------------------------------------------------------------------------- |
+| `cssPath` | `string` | Yes      | Path to the CSS file where `@tailwind` directives or v4 imports are defined. |
 
 ## Contributing
 
